@@ -1,10 +1,9 @@
 
-def temp_conversion(temperature, scale, desired_scale):
+def temp_conversion(degree, scale, desired_scale):
     """Convert temperature from Celsius, Fahrenheit, or Kelvin to another scale."""
-    try:
-        degree = float(temperature)
-    except ValueError:
-        raise ValueError("Invalid temperature value. Please enter a valid number.")
+
+    if type(degree!= float):
+        return ValueError("Invalid temperature value. Please enter a valid number.")
         
     if (scale == "C" or scale == "c") and (desired_scale == "C" or desired_scale == "c"):      
         return degree
@@ -21,7 +20,7 @@ def temp_conversion(temperature, scale, desired_scale):
     elif (scale == "K" or scale == "k") and (desired_scale == "F" or desired_scale == "f"):     #kelvin to fahrenheit
         return ((degree - 273.15) * 9/5) + 32
     else:
-        raise ValueError("Invalid scale. Please use 'C' for Celsius or 'F' for Fahrenheit or 'K' for Kelvin.")
+        return ValueError("Invalid scale. Please use 'C' for Celsius or 'F' for Fahrenheit or 'K' for Kelvin.")
 
    
 #test the function
@@ -36,16 +35,16 @@ print("The converted temperature is:",converted_temp)
 def dice_roll(dice_configuration, desired_number ):
     """Simulate rolling dice and return the prbability of getting a desired number."""
     if 'd' not in dice_configuration:               #if the string doesn't contain a 'd' then raise an exception
-        raise ValueError("the dice configuration has to have a 'd'")
+        return ValueError("the dice configuration has to have a 'd'")
     my_list= dice_configuration.split("d")    #spliting the entered string to get the number of dice and sides
-    if type(my_list) != int:
-         raise ValueError("invalid input,please enter a positive number: ")
+    if type(my_list) != int:          
+        return ValueError("invalid input,please enter a positive number: ")
     num_dice=int(my_list[0])
     sides=int(my_list[1])
-    
     if num_dice <= 0 or sides <= 1 or desired_number <1   or type(desired_number) != int:
-        raise ValueError("Invalid input value. Please ensure all values are positive integers")
-
+        return ValueError("Invalid input value. Please ensure all values are positive integers")
+    
+    
 
     num_outcome = pow(sides, num_dice) 
     probability = 0
@@ -75,7 +74,7 @@ def dice_roll(dice_configuration, desired_number ):
                         if(i+j+k+l>=desired_number):            #same as previous cases , if the sum of 4sides>number: increment
                                     probability+=1/num_outcome
     else:
-         raise ValueError("the maximum possible number of dice is 4, enter a number between 1 and 4")   #if the number of dice is more than 4 , raise an exception
+        return ValueError("the maximum possible number of dice is 4, enter a number between 1 and 4")   #if the number of dice is more than 4 , raise an exception
     
 
     return round(probability,2)       #return the probability rounded to 2 decimals
